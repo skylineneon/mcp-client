@@ -5,7 +5,7 @@ from get_weather import query_weather
 from computer_config import get_host_info
 
 # 初始化 MCP 服务器,并命名
-mcp = FastMCP("WeatherServer")
+mcp = FastMCP("WeatherServer",port=8990) # 若为sse模式，则需要指定port
 app = Server("example-server")
 
 mcp.add_tool(query_weather)
@@ -31,4 +31,7 @@ if __name__ == "__main__":
     因此，编辑完服务器后，并不能直接调用这个服务器，而是需要创建一个对应的能够进行
     stdio的客户端，才能够进行通信
     """
+    
     mcp.run(transport="stdio")
+    # mcp.run(transport="sse")
+    
